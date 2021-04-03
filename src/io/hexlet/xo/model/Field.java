@@ -11,7 +11,7 @@ public class Field {
         return FIELD_SIZE;
     }
 
-    public Figure getFigure (final Point point) {
+    public Figure getFigure(final Point point) {
         return field[point.x][point.y];
     }
 

@@ -15,7 +15,6 @@ class FieldTest {
         assertEquals(3, field.getSize());
     }
 
-
     @Test
     void setFigure() {
         final Field field = new Field();
