@@ -1,5 +1,6 @@
 package io.hexlet.xo.model;
 
+import io.hexlet.xo.model.exceptions.AbstractXOException;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 import io.hexlet.xo.model.exceptions.PointAlreadyOccupiedException;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class FieldTest {
     }
 
     @Test
-    void setFigure() throws InvalidPointException, PointAlreadyOccupiedException {
+    void setFigure() throws AbstractXOException {
         final Field field = new Field();
         final Point point = new Point(0, 0);
         final Figure figure = Figure.O;
@@ -28,6 +29,139 @@ class FieldTest {
         final Figure expectedFigure = Figure.O;
 
         assertEquals(expectedFigure, actualFigure);
+    }
 
+    @Test
+    void getFigureWhenFigureIsNotSet() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(0, 0);
+
+        final Figure actualFigure = field.getFigure(point);
+
+        assertNull(actualFigure);
+    }
+
+    @Test
+    void getFigureWhenXIsLessThanZero() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(-1, 0);
+
+        try {
+            field.getFigure(point);
+            fail();
+        } catch (final InvalidPointException e) {
+
+        }
+    }
+
+    @Test
+    void getFigureWhenXIsMoreThanFieldSize() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(field.getSize() + 1, 0);
+
+        try {
+            field.getFigure(point);
+            fail();
+        } catch (final InvalidPointException e) {
+
+        }
+    }
+
+    @Test
+    void getFigureWhenYIsLessThanZero() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(0, -1);
+
+        try {
+            field.getFigure(point);
+            fail();
+        } catch (final InvalidPointException e) {
+
+        }
+    }
+
+    @Test
+    void getFigureWhenYIsMoreThanFieldSize() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(0, field.getSize() + 1);
+
+        try {
+            field.getFigure(point);
+            fail();
+        } catch (final InvalidPointException e) {
+
+        }
+    }
+
+    @Test
+    void setFigureWhenPointIsAlreadyOccupied() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(0, 0);
+        final Figure figure = Figure.X;
+
+        field.setFigure(point, figure);
+
+        try {
+            field.setFigure(point, figure);
+            fail();
+        } catch (final PointAlreadyOccupiedException e) {
+
+        }
+    }
+
+    @Test
+    void setFigureWhenXIsLessThanZero() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(-1, 0);
+        final Figure figure = Figure.X;
+
+        try {
+            field.setFigure(point, figure);
+            fail();
+        } catch (final InvalidPointException e) {
+
+        }
+    }
+
+    @Test
+    void setFigureWhenXIsMoreThanFieldSize() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(field.getSize() + 1, 0);
+        final Figure figure = Figure.X;
+
+        try {
+            field.setFigure(point, figure);
+            fail();
+        } catch (final InvalidPointException e) {
+
+        }
+    }
+
+    @Test
+    void setFigureWhenYIsLessThanZero() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(0, -1);
+        final Figure figure = Figure.X;
+
+        try {
+            field.setFigure(point, figure);
+            fail();
+        } catch (final InvalidPointException e) {
+
+        }
+    }
+
+    @Test
+    void setFigureWhenYIsMoreThanFieldSize() throws AbstractXOException {
+        final Field field = new Field();
+        final Point point = new Point(0, field.getSize() + 1);
+        final Figure figure = Figure.X;
+
+        try {
+            field.setFigure(point, figure);
+            fail();
+        } catch (final InvalidPointException e) {
+
+        }
     }
 }
