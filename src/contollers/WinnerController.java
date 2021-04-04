@@ -5,9 +5,10 @@ import io.hexlet.xo.model.Figure;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 
 import java.awt.*;
-import java.util.Arrays;
+
 
 public class WinnerController {
+
     public Figure getWinner(final Field field) {
         Figure winner;
 
@@ -36,30 +37,12 @@ public class WinnerController {
 
     private Figure haveWinnerInVertical(Field field)
             throws InvalidPointException {
-
         for (int row = 0; row < field.getSize(); row++) {
 
-            int lineNumber = row;
-            Figure[] figures = new Figure[field.getSize()];
-
-            for (int column = 0; column < field.getSize(); column++) {
-                final Point p = new Point();
-                p.x = lineNumber;
-                p.y = column;
-
-                Figure currentFigure = field.getFigure(p);
-                if (currentFigure == null) break;
-                figures[column] = currentFigure;
-            }
-
-            boolean isWinner = Arrays.stream(figures).allMatch(
-                    figure -> figure == figures[0] && figures[0] != null);
-
-            if (isWinner) {
-                return figures[0];
-            }
+            if (check(field, new Point(row, 0),
+                    p -> new Point(p.x, p.y + 1)))
+                return field.getFigure(new Point(row, 0));
         }
-
         return null;
     }
 
@@ -67,25 +50,9 @@ public class WinnerController {
             throws InvalidPointException {
         for (int column = 0; column < field.getSize(); column++) {
 
-            int columnNumber = column;
-            Figure[] figures = new Figure[field.getSize()];
-
-            for (int row = 0; row < field.getSize(); row++) {
-                final Point p = new Point();
-                p.x = row;
-                p.y = columnNumber;
-
-                Figure currentFigure = field.getFigure(p);
-                if (currentFigure == null) break;
-                figures[row] = currentFigure;
-            }
-
-            boolean isWinner = Arrays.stream(figures).allMatch(
-                    figure -> figure == figures[0] && figures[0] != null);
-
-            if (isWinner) {
-                return figures[0];
-            }
+            if (check(field, new Point(0, column),
+                    p -> new Point(p.x + 1, p.y)))
+                return field.getFigure(new Point(0, column));
         }
         return null;
     }
@@ -93,60 +60,54 @@ public class WinnerController {
 
     private Figure haveWinnerInDiagonal1(Field field)
             throws InvalidPointException {
-        Figure[] figures = new Figure[field.getSize()];
-
-        int end = field.getSize() - 1;
-
-        for (int start = 0; start < field.getSize(); start++) {
-            final Point p = new Point();
-            p.x = start;
-            p.y = end;
-
-            Figure currentFigure = field.getFigure(p);
-            if (currentFigure == null) break;
-            figures[start] = currentFigure;
-            System.out.print(figures[start]);
-
-            end--;
-        }
-        System.out.println();
-
-        boolean isWinner = Arrays.stream(figures)
-                .allMatch(figure -> figure == figures[0] && figures[0] != null);
-
-        if (isWinner) {
-            return figures[0];
-        }
+        if (check(field, new Point(0, field.getSize()),
+                p -> new Point(p.x + 1, p.y - 1)))
+            return field.getFigure(new Point(1, 1));
 
         return null;
     }
 
     private Figure haveWinnerInDiagonal2(Field field)
             throws InvalidPointException {
-        Figure[] figures = new Figure[field.getSize()];
-
-        for (int column = 0; column < field.getSize(); column++) {
-            for (int row = field.getSize() - 1; row >= 0; row--) {
-                final Point p = new Point();
-                p.x = row;
-                p.y = column;
-
-                if (row == column) {
-                    Figure currentFigure = field.getFigure(p);
-                    if (currentFigure == null) break;
-                    figures[column] = currentFigure;
-                }
-            }
-        }
-
-        boolean isWinner = Arrays
-                .stream(figures)
-                .allMatch(figure -> figure == figures[0] && figures[0] != null);
-
-        if (isWinner) {
-            return figures[0];
-        }
+        if (check(field, new Point(0, 0),
+                p -> new Point(p.x + 1, p.y + 1)))
+            return field.getFigure(new Point(0, 0));
 
         return null;
+    }
+
+    private boolean check(final Field field,
+                          final Point currentPoint,
+                          final IPointGenerator pointGenerator) {
+        final Figure currentFigure;
+        final Figure nextFigure;
+        final Point nextPoint = pointGenerator.next(currentPoint);
+
+        try {
+            currentFigure = field.getFigure(currentPoint);
+
+            if (currentFigure == null) return false;
+
+            nextFigure = field.getFigure(nextPoint);
+            if (currentFigure != nextFigure) return false;
+
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
+        }
+
+        if (currentPoint.getX() == field.getMaxCoordinate() - 1 ||
+                currentPoint.getY() == field.getMaxCoordinate() - 1)
+            return true;
+
+        return check(field, nextPoint, pointGenerator);
+    }
+
+    /**
+     * Возвращает следующее значение поля, согласно реализованной при вызове
+     * логике
+     */
+    private interface IPointGenerator {
+
+        Point next(final Point point);
     }
 }

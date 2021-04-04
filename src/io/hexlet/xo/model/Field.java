@@ -15,7 +15,7 @@ public class Field {
         field = new Figure[fieldSize][fieldSize];
     }
 
-    public static int getMinCoordinate() {
+    public int getMinCoordinate() {
         return MIN_COORDINATE;
     }
 
