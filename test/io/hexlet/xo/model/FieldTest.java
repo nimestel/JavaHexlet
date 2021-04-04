@@ -94,22 +94,6 @@ class FieldTest {
     }
 
     @Test
-    void setFigureWhenPointIsAlreadyOccupied() throws AbstractXOException {
-        final Field field = new Field();
-        final Point point = new Point(0, 0);
-        final Figure figure = Figure.X;
-
-        field.setFigure(point, figure);
-
-        try {
-            field.setFigure(point, figure);
-            fail();
-        } catch (final PointAlreadyOccupiedException e) {
-
-        }
-    }
-
-    @Test
     void setFigureWhenXIsLessThanZero() throws AbstractXOException {
         final Field field = new Field();
         final Point point = new Point(-1, 0);

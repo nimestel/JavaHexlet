@@ -1,7 +1,6 @@
 package io.hexlet.xo.model;
 
 import io.hexlet.xo.model.exceptions.InvalidPointException;
-import io.hexlet.xo.model.exceptions.PointAlreadyOccupiedException;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -26,13 +25,13 @@ public class Field {
         return field[point.x][point.y];
     }
 
-    public void setFigure(final Point point, Figure figure) throws InvalidPointException, PointAlreadyOccupiedException {
+    public void setFigure(final Point point,
+                          Figure figure)
+            throws InvalidPointException {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
         }
-        if (field[point.x][point.y] != null) {
-            throw new PointAlreadyOccupiedException();
-        }
+
         field[point.x][point.y] = figure;
     }
 
