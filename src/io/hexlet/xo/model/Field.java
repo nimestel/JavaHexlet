@@ -4,6 +4,7 @@ import io.hexlet.xo.model.exceptions.InvalidPointException;
 import io.hexlet.xo.model.exceptions.PointAlreadyOccupiedException;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class Field {
     private static final int FIELD_SIZE = 3;
@@ -14,6 +15,10 @@ public class Field {
 
     public int getSize() {
         return FIELD_SIZE;
+    }
+
+    public Figure[][] getField() {
+        return field;
     }
 
     public Figure getFigure(final Point point) throws InvalidPointException {
@@ -37,5 +42,12 @@ public class Field {
 
     private boolean checkCoordinate(final int coordinate) {
         return coordinate >= MIN_COORDINATE && coordinate < MAX_COORDINATE;
+    }
+
+    @Override
+    public String toString() {
+        return "Field{" +
+                "field=" + Arrays.deepToString(field) +
+                '}';
     }
 }
