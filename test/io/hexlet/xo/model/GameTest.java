@@ -11,8 +11,8 @@ class GameTest {
 
     @Test
     void getField() {
-        Game game = new Game.Builder().field(new Field()).build();
-        Field expected = new Field();
+        Game game = new Game.Builder().field(new Field(3)).build();
+        Field expected = new Field(3);
         Field actual = game.getField();
 
         assertEquals(expected.toString(), actual.toString());
@@ -24,7 +24,7 @@ class GameTest {
         Player player2 = new Player("rty", Figure.O);
 
         Game game = new Game.Builder()
-                .field(new Field())
+                .field(new Field(3))
                 .players(new Player[]{player1,player2}).build();
 
         Player[] actual = game.getPlayers();
