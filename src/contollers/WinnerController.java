@@ -35,7 +35,7 @@ public class WinnerController {
         return null;
     }
 
-    private Figure haveWinnerInVertical(Field field)
+    Figure haveWinnerInVertical(Field field)
             throws InvalidPointException {
         for (int row = 0; row < field.getSize(); row++) {
 
@@ -46,7 +46,7 @@ public class WinnerController {
         return null;
     }
 
-    private Figure haveWinnerInHorizontal(Field field)
+    Figure haveWinnerInHorizontal(Field field)
             throws InvalidPointException {
         for (int column = 0; column < field.getSize(); column++) {
 
@@ -58,7 +58,7 @@ public class WinnerController {
     }
 
 
-    private Figure haveWinnerInDiagonal1(Field field)
+    Figure haveWinnerInDiagonal1(Field field)
             throws InvalidPointException {
         if (check(field, new Point(0, field.getSize()),
                 p -> new Point(p.x + 1, p.y - 1)))
@@ -67,7 +67,7 @@ public class WinnerController {
         return null;
     }
 
-    private Figure haveWinnerInDiagonal2(Field field)
+    Figure haveWinnerInDiagonal2(Field field)
             throws InvalidPointException {
         if (check(field, new Point(0, 0),
                 p -> new Point(p.x + 1, p.y + 1)))
@@ -76,9 +76,16 @@ public class WinnerController {
         return null;
     }
 
-    private boolean check(final Field field,
+    boolean check(final Field field,
                           final Point currentPoint,
                           final IPointGenerator pointGenerator) {
+
+        return recursiveCheck(0, field, currentPoint, pointGenerator);
+    }
+
+    boolean recursiveCheck(int counter, final Field field,
+                           final Point currentPoint,
+                           final IPointGenerator pointGenerator) {
         final Figure currentFigure;
         final Figure nextFigure;
         final Point nextPoint = pointGenerator.next(currentPoint);
@@ -93,20 +100,19 @@ public class WinnerController {
 
         } catch (InvalidPointException e) {
             e.printStackTrace();
+
+            return (currentPoint.getX() == field.getMaxCoordinate() - 1||
+                    currentPoint.getY() == field.getMaxCoordinate() - 1) && counter > 0;
         }
 
-        if (currentPoint.getX() == field.getMaxCoordinate() - 1 ||
-                currentPoint.getY() == field.getMaxCoordinate() - 1)
-            return true;
-
-        return check(field, nextPoint, pointGenerator);
+        return recursiveCheck(counter + 1, field, nextPoint, pointGenerator);
     }
 
     /**
      * Возвращает следующее значение поля, согласно реализованной при вызове
      * логике
      */
-    private interface IPointGenerator {
+    interface IPointGenerator {
 
         Point next(final Point point);
     }
