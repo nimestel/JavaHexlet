@@ -60,7 +60,7 @@ public class WinnerController {
 
     Figure haveWinnerInDiagonal1(Field field)
             throws InvalidPointException {
-        if (check(field, new Point(0, field.getSize()),
+        if (check(field, new Point(0, field.getSize() - 1),
                 p -> new Point(p.x + 1, p.y - 1)))
             return field.getFigure(new Point(1, 1));
 
