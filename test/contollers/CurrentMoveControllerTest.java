@@ -24,7 +24,7 @@ class CurrentMoveControllerTest {
     }
 
     @Test
-    void currentMove_WhenSet_OneX() {
+    void currentMove_When_OneX() {
         Field field = new Field(fieldSize);
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
@@ -39,7 +39,7 @@ class CurrentMoveControllerTest {
     }
 
     @Test
-    void currentMove_WhenSet_OneXOneO() {
+    void currentMove_When_OneXOneO() {
         Field field = new Field(fieldSize);
         Figure figure = Figure.X;
         CurrentMoveController currentMoveController = new CurrentMoveController();
@@ -56,7 +56,7 @@ class CurrentMoveControllerTest {
     }
 
     @Test
-    void currentMove_WhenSet_TwoXOneO() {
+    void currentMove_When_TwoXOneO() {
         Field field = new Field(fieldSize);
         Figure figure = Figure.X;
         CurrentMoveController currentMoveController = new CurrentMoveController();
@@ -143,7 +143,7 @@ class CurrentMoveControllerTest {
     }
 
     @Test
-    void countFigures_WhenSet_OneX() {
+    void countFigures_When_OneX() {
         Field field = new Field(3);
         Figure figure = Figure.X;
         CurrentMoveController currentMoveController = new CurrentMoveController();
@@ -163,7 +163,7 @@ class CurrentMoveControllerTest {
     }
 
     @Test
-    void countFigures_WhenSet_TwoXOneO() {
+    void countFigures_When_TwoXOneO() {
         Field field = new Field(3);
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
