@@ -11,6 +11,6 @@ public enum Figure {
 
     @Override
     public String toString() {
-        return "Figure{"+ figure +'}';
+        return figure;
     }
 }

@@ -99,8 +99,6 @@ public class WinnerController {
             if (currentFigure != nextFigure) return false;
 
         } catch (InvalidPointException e) {
-            e.printStackTrace();
-
             return (currentPoint.getX() == field.getMaxCoordinate() - 1||
                     currentPoint.getY() == field.getMaxCoordinate() - 1) && counter > 0;
         }
