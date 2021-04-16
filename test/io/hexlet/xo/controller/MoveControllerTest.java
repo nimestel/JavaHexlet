@@ -16,7 +16,7 @@ class MoveControllerTest {
     @Test
     void placeFigureWhenFieldOccupied()
             throws InvalidPointException {
-        Field field = new Field(3);
+        Field<Figure> field = new Field<>(3);
         Point point = new Point(0, 0);
         Figure figure = Figure.O;
         MoveController mc = new MoveController();
@@ -29,7 +29,7 @@ class MoveControllerTest {
 
     @Test
     void placeFigureWhenFieldIncorrect() {
-        Field field = new Field(3);
+        Field<Figure> field = new Field<>(3);
         Point point = new Point(-1 , 0);
         Figure figure = Figure.O;
         MoveController mc = new MoveController();
@@ -40,7 +40,7 @@ class MoveControllerTest {
 
     @Test
     void placeFigureWhenFigureIsNull() {
-        Field field = new Field(3);
+        Field<Figure> field = new Field<>(3);
         Point point = new Point(0 , 0);
         MoveController mc = new MoveController();
 
@@ -54,7 +54,7 @@ class MoveControllerTest {
             InvalidPointException,
             PointAlreadyOccupiedException,
             NullFigureException {
-        Field field = new Field(3);
+        Field<Figure> field = new Field<>(3);
         Point point = new Point(1, 1);
         Figure figure = Figure.O;
         MoveController mc = new MoveController();

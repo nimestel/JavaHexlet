@@ -16,7 +16,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void currentMove_WhenFieldEmpty() {
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
         Figure currentFigure = currentMoveController.currentMove(field);
@@ -25,7 +25,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void currentMove_When_OneX() {
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
         try {
@@ -40,7 +40,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void currentMove_When_OneXOneO() {
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
         Figure figure = Figure.X;
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
@@ -57,7 +57,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void currentMove_When_TwoXOneO() {
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
         Figure figure = Figure.X;
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
@@ -75,7 +75,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void currentMove_WhenField_AllOccupied() {
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
         Figure figure;
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
@@ -100,7 +100,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void currentMove_SeveralSteps() {
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
         try {
@@ -130,7 +130,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void countFigures_WhenFieldEmpty() {
-        Field field = new Field(3);
+        Field<Figure> field = new Field<>(3);
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
         int expectedCountO = 0;
@@ -144,7 +144,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void countFigures_When_OneX() {
-        Field field = new Field(3);
+        Field<Figure> field = new Field<>(3);
         Figure figure = Figure.X;
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
@@ -164,7 +164,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void countFigures_When_TwoXOneO() {
-        Field field = new Field(3);
+        Field<Figure> field = new Field<>(3);
         CurrentMoveController currentMoveController = new CurrentMoveController();
 
         int expectedCountO = 1;
@@ -186,7 +186,7 @@ class CurrentMoveControllerTest {
 
     @Test
     void countFigures_WhenField_AllOccupied() {
-        Field field = new Field(3);
+        Field<Figure> field = new Field<>(3);
         Figure figure;
         CurrentMoveController currentMoveController = new CurrentMoveController();
 

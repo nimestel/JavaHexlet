@@ -12,7 +12,7 @@ public class AICoordinateGetter implements ICoordinateGetter {
     Figure oppositeFigure = Figure.O;
 
     @Override
-    public Point getMoveCoordinate(Field field, Figure figure) throws InvalidPointException {
+    public Point getMoveCoordinate(Field<Figure> field, Figure figure) throws InvalidPointException {
         this.oppositeFigure = figure;
         Point p = new Point(1, 1);
         if (field.getFigure(p) == null) {
@@ -42,7 +42,7 @@ public class AICoordinateGetter implements ICoordinateGetter {
         return p;
     }
 
-    private Point getOppositeCorner(Field field) throws InvalidPointException {
+    private Point getOppositeCorner(Field<Figure> field) throws InvalidPointException {
         int edge = field.getSize() - 1;
         Point corner1 = new Point(0, edge);
         Point corner2 = new Point(0, 0);
@@ -64,15 +64,15 @@ public class AICoordinateGetter implements ICoordinateGetter {
         return null;
     }
 
-    private Point getCoordinateIfIAlmostWin(Field field) throws InvalidPointException {
+    private Point getCoordinateIfIAlmostWin(Field<Figure> field) throws InvalidPointException {
         return checkAlmostWinner(field, Figure.X);
     }
 
-    private Point getCoordinateIfOtherAlmostWin(Field field) throws InvalidPointException {
+    private Point getCoordinateIfOtherAlmostWin(Field<Figure> field) throws InvalidPointException {
         return checkAlmostWinner(field, oppositeFigure);
     }
 
-    private Point checkAlmostWinner(Field field, Figure figure) throws InvalidPointException {
+    private Point checkAlmostWinner(Field<Figure> field, Figure figure) throws InvalidPointException {
         System.out.println();
         System.out.printf("Проверяю возможность победы %s", figure);
         System.out.println();
@@ -92,7 +92,7 @@ public class AICoordinateGetter implements ICoordinateGetter {
         return null;
     }
 
-    private Point checkColumn(Field field, Figure targetFigure) throws InvalidPointException {
+    private Point checkColumn(Field<Figure> field, Figure targetFigure) throws InvalidPointException {
         for (int row = 0; row < field.getSize(); row++) {
 
             Figure[] figures = new Figure[field.getSize()];
@@ -119,7 +119,7 @@ public class AICoordinateGetter implements ICoordinateGetter {
 
     }
 
-    private Point checkRow(Field field, Figure targetFigure) throws InvalidPointException {
+    private Point checkRow(Field<Figure> field, Figure targetFigure) throws InvalidPointException {
         for (int column = 0; column < field.getSize(); column++) {
 
             Figure[] figures = new Figure[field.getSize()];
@@ -145,7 +145,7 @@ public class AICoordinateGetter implements ICoordinateGetter {
         return null;
     }
 
-    private Point checkDiagonal1(Field field, Figure targetFigure) throws InvalidPointException {
+    private Point checkDiagonal1(Field<Figure> field, Figure targetFigure) throws InvalidPointException {
         Figure[] figures = new Figure[field.getSize()];
 
         int end = field.getSize() - 1;
@@ -173,7 +173,7 @@ public class AICoordinateGetter implements ICoordinateGetter {
     }
 
 
-    private Point checkDiagonal2(Field field, Figure targetFigure) throws InvalidPointException {
+    private Point checkDiagonal2(Field<Figure> field, Figure targetFigure) throws InvalidPointException {
         Figure[] figures = new Figure[field.getSize()];
         Point firstNullPointCoordinateInLine = null;
 
@@ -202,7 +202,7 @@ public class AICoordinateGetter implements ICoordinateGetter {
         return null;
     }
 
-    private boolean checkOppositeFigureInLine(Field field, Figure targetFigure, Point p)
+    private boolean checkOppositeFigureInLine(Field<Figure> field, Figure targetFigure, Point p)
             throws InvalidPointException {
         if (!(targetFigure.equals(field.getFigure(p))) && (field.getFigure(p) != null)) {
             System.out.printf("Попался вражеский символ %s", field.getFigure(p));
@@ -215,7 +215,8 @@ public class AICoordinateGetter implements ICoordinateGetter {
     private boolean isAlmostWinInLine(Figure[] figures, Figure targetFigure) {
         boolean almostWinner = Arrays.stream(figures).allMatch(figure -> figure == targetFigure || figure == null);
 
-        System.out.printf("Проверяю возможность выиграть для линии %s", Arrays.deepToString(figures));
+        System.out.printf("Проверяю возможность выиграть для линии %s",
+                Arrays.deepToString(figures));
         System.out.println();
 
         int nullCount = countNullsInLine(figures);

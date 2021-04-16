@@ -17,9 +17,9 @@ public class XOCLI {
                 new Player(name2, Figure.O)
         };
 
-        final Field field = new Field(3);
+        final Field<Figure> field = new Field<>(3);
 
-        final Game game = new Game.Builder()
+        final Game<Figure> game = new Game.Builder<Figure>()
                 .players(players)
                 .field(field)
                 .name("XO-XO-XO")

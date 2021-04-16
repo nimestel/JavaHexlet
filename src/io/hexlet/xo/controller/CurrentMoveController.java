@@ -11,7 +11,7 @@ public class CurrentMoveController {
     int countX = 0;
     int countO = 0;
 
-    public Figure currentMove(final Field field) {
+    public Figure currentMove(final Field<Figure> field) {
         countFigures(field);
         if(countX > countO && countX+countO < field.getSize()*field.getSize()) return Figure.O;
         if(countX == countO && countX != 0) return Figure.X;
@@ -19,7 +19,7 @@ public class CurrentMoveController {
         return null;
     }
 
-     void countFigures(Field field) {
+     void countFigures(Field<Figure> field) {
         countX = 0;
         countO = 0;
 

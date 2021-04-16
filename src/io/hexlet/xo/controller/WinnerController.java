@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class WinnerController {
 
-    public Figure getWinner(final Field field) {
+    public Figure getWinner(final Field<Figure> field) {
         Figure winner;
 
         try {
@@ -35,7 +35,7 @@ public class WinnerController {
         return null;
     }
 
-    Figure haveWinnerInVertical(Field field)
+    Figure haveWinnerInVertical(Field<Figure> field)
             throws InvalidPointException {
         for (int row = 0; row < field.getSize(); row++) {
 
@@ -46,7 +46,7 @@ public class WinnerController {
         return null;
     }
 
-    Figure haveWinnerInHorizontal(Field field)
+    Figure haveWinnerInHorizontal(Field<Figure> field)
             throws InvalidPointException {
         for (int column = 0; column < field.getSize(); column++) {
 
@@ -58,7 +58,7 @@ public class WinnerController {
     }
 
 
-    Figure haveWinnerInDiagonal1(Field field)
+    Figure haveWinnerInDiagonal1(Field<Figure> field)
             throws InvalidPointException {
         if (check(field, new Point(0, field.getSize() - 1),
                 p -> new Point(p.x + 1, p.y - 1)))
@@ -67,7 +67,7 @@ public class WinnerController {
         return null;
     }
 
-    Figure haveWinnerInDiagonal2(Field field)
+    Figure haveWinnerInDiagonal2(Field<Figure> field)
             throws InvalidPointException {
         if (check(field, new Point(0, 0),
                 p -> new Point(p.x + 1, p.y + 1)))
@@ -76,14 +76,14 @@ public class WinnerController {
         return null;
     }
 
-    boolean check(final Field field,
+    boolean check(final Field<Figure> field,
                           final Point currentPoint,
                           final IPointGenerator pointGenerator) {
 
         return recursiveCheck(0, field, currentPoint, pointGenerator);
     }
 
-    boolean recursiveCheck(int counter, final Field field,
+    boolean recursiveCheck(int counter, final Field<Figure> field,
                            final Point currentPoint,
                            final IPointGenerator pointGenerator) {
         final Figure currentFigure;

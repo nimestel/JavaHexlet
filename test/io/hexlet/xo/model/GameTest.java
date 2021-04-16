@@ -11,9 +11,9 @@ class GameTest {
 
     @Test
     void getField() {
-        Game game = new Game.Builder().field(new Field(3)).build();
-        Field expected = new Field(3);
-        Field actual = game.getField();
+        Game<Figure> game = new Game.Builder<Figure>().field(new Field<>(3)).build();
+        Field<Figure> expected = new Field<>(3);
+        Field<Figure> actual = game.getField();
 
         assertEquals(expected.toString(), actual.toString());
     }
@@ -23,8 +23,8 @@ class GameTest {
         Player player1 = new Player("qwe", Figure.X);
         Player player2 = new Player("rty", Figure.O);
 
-        Game game = new Game.Builder()
-                .field(new Field(3))
+        Game<Figure> game = new Game.Builder<Figure>()
+                .field(new Field<>(3))
                 .players(new Player[]{player1,player2}).build();
 
         Player[] actual = game.getPlayers();
@@ -38,7 +38,7 @@ class GameTest {
 
     @Test
     void getNameDefault() {
-        Game game = new Game.Builder().build();
+        Game<Figure> game = new Game.Builder<Figure>().build();
         String expected = "X x O game";
         String actual = game.getName();
 
@@ -49,7 +49,7 @@ class GameTest {
     void getNameCustom() {
         String input = getRandomString(10);
 
-        Game game = new Game.Builder().name(input).build();
+        Game<Figure> game = new Game.Builder<Figure>().name(input).build();
         String expected = input;
         String actual = game.getName();
 

@@ -15,7 +15,7 @@ class WinnerControllerTest {
 
     @Test
     void getWinner_WhenField_IsEmpty() {
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
         WinnerController wc = new WinnerController();
         Figure winner = wc.getWinner(field);
 
@@ -28,7 +28,7 @@ class WinnerControllerTest {
         Figure figure = Figure.O;
 
         for (int i = 0; i < fieldSize; i++) {
-            Field field = new Field(fieldSize);
+            Field<Figure> field = new Field<>(fieldSize);
             try {
                 for (int j = 0; j < fieldSize; j++) {
                     field.setFigure(new Point(i, j), figure);
@@ -47,7 +47,7 @@ class WinnerControllerTest {
     void getWinner_WhenOtherFigure_InBeginOfRow() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         try {
             int row = 0;
@@ -68,7 +68,7 @@ class WinnerControllerTest {
     void getWinner_WhenOtherFigure_InMiddleOfRow() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         try {
             int row = 1;
@@ -89,7 +89,7 @@ class WinnerControllerTest {
     void getWinner_WhenOtherFigure_InEndOfRow() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         try {
             int row = 1;
@@ -112,7 +112,7 @@ class WinnerControllerTest {
         Figure figure = Figure.O;
 
         for (int i = 0; i < fieldSize; i++) {
-            Field field = new Field(fieldSize);
+            Field<Figure> field = new Field<>(fieldSize);
             try {
                 for (int j = 0; j < fieldSize; j++) {
                     field.setFigure(new Point(j, i), figure);
@@ -131,7 +131,7 @@ class WinnerControllerTest {
     void getWinner_WhenOtherFigure_InBeginOfColumn() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         try {
             int row = 0;
@@ -152,7 +152,7 @@ class WinnerControllerTest {
     void getWinner_WhenOtherFigure_InMiddleOfColumn() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         try {
             int row = 1;
@@ -173,7 +173,7 @@ class WinnerControllerTest {
     void getWinner_WhenOtherFigure_InEndOfColumn() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         try {
             int row = 1;
@@ -194,7 +194,7 @@ class WinnerControllerTest {
     void getWinner_WhenWinner_InDiagonal1() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         int end = field.getSize() - 1;
 
@@ -221,7 +221,7 @@ class WinnerControllerTest {
     void getWinner_WhenOtherFigure_InDiagonal1() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         int end = field.getSize() - 1;
 
@@ -254,7 +254,7 @@ class WinnerControllerTest {
     void getWinner_WhenWinner_InDiagonal2() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         for (int i = 0; i < field.getSize(); i++) {
             final Point p = new Point();
@@ -279,7 +279,7 @@ class WinnerControllerTest {
     void getWinner_WhenOtherFigure_InDiagonal2() {
         WinnerController wc = new WinnerController();
         Figure figure = Figure.O;
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         for (int i = 0; i < field.getSize(); i++) {
             final Point p = new Point();
@@ -309,7 +309,7 @@ class WinnerControllerTest {
     void check_Point_LessThanNull() {
         WinnerController winnerController = new WinnerController();
         boolean result = winnerController.check(
-                new Field(fieldSize),
+                new Field<>(fieldSize),
                 new Point(-1, 0),
                 p -> new Point(p.x + 1, p.y + 1)
         );
@@ -320,7 +320,7 @@ class WinnerControllerTest {
     void check_Point_MoreThanFieldSize() {
         WinnerController winnerController = new WinnerController();
         boolean result = winnerController.check(
-                new Field(fieldSize),
+                new Field<>(fieldSize),
                 new Point(1, fieldSize + 1),
                 p -> new Point(p.x + 1, p.y)
         );
@@ -330,7 +330,7 @@ class WinnerControllerTest {
     @Test
     void check_Winner() {
         WinnerController winnerController = new WinnerController();
-        Field field = new Field(fieldSize);
+        Field<Figure> field = new Field<>(fieldSize);
 
         for (int j = 0; j < fieldSize; j++) {
             try {

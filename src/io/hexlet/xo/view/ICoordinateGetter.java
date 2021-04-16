@@ -8,5 +8,5 @@ import java.awt.*;
 
 public interface ICoordinateGetter {
 
-    Point getMoveCoordinate(Field field, Figure figure) throws InvalidPointException;
+    Point getMoveCoordinate(Field<Figure> field, Figure figure) throws InvalidPointException;
 }

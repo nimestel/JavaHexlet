@@ -11,7 +11,7 @@ public class RandomCoordinateGetter implements ICoordinateGetter {
 
     private static final Random RANDOM = new Random();
 
-    public Point getMoveCoordinate(final Field field, Figure figure) throws InvalidPointException {
+    public Point getMoveCoordinate(final Field<Figure> field, Figure figure) throws InvalidPointException {
         Point randomPoint = new Point(RANDOM.nextInt(field.getSize()), RANDOM.nextInt(field.getSize()));
 
         while (field.getFigure(randomPoint) != null) {

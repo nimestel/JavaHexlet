@@ -9,7 +9,7 @@ import io.hexlet.xo.model.exceptions.PointAlreadyOccupiedException;
 import java.awt.*;
 
 public class MoveController {
-    public void placeFigure(Field field,
+    public void placeFigure(Field<Figure> field,
                             Point point,
                             Figure figure)
             throws

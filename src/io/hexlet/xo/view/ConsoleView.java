@@ -23,10 +23,10 @@ public class ConsoleView {
     private final WinnerController winnerController = new WinnerController();
     private final MoveController moveController = new MoveController();
 
-    public void show(Game game) {
+    public void show(Game<Figure> game) {
         printGameName(game);
 
-        final Field field = game.getField();
+        final Field<Figure> field = game.getField();
         for (int i = 0; i < field.getMaxCoordinate(); i++) {
             for (int j = 0; j < field.getMaxCoordinate(); j++) {
 
@@ -51,7 +51,7 @@ public class ConsoleView {
         }
     }
 
-    private void printGameName(Game game) {
+    private void printGameName(Game<Figure> game) {
         System.out.format("Game name: %s\n", game.getName());
     }
 
@@ -83,8 +83,8 @@ public class ConsoleView {
 
     }
 
-    public boolean move(Game game) {
-        final Field field = game.getField();
+    public boolean move(Game<Figure> game) {
+        final Field<Figure> field = game.getField();
 
         Figure winner = winnerController.getWinner(field);
         if (winner != null) {
